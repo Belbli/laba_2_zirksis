@@ -5,16 +5,14 @@ import com.github.belbli.dto.FileRequestResponse;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
 
 public class MessageHandler {
     public FileRequestResponse handle(FileRequest request) {
-
         File dir = new File(request.getDir());
-        return new FileRequestResponse(
-                Arrays.stream(
-                        dir.listFiles((dir1, name) -> name.endsWith(request.getExtension()))
-                ).collect(Collectors.toMap(File::getName, File::length))
-        );
+        LinkedHashMap<String, Long> filesInfo = new LinkedHashMap<>();
+        File[] files = dir.listFiles((dir1, name) -> name.endsWith(request.getExtension()));
+        Arrays.asList(files).forEach(file -> filesInfo.put(file.getName(), file.length()));
+        return new FileRequestResponse(filesInfo);
     }
 }

@@ -7,10 +7,20 @@ public class FileRequest implements Serializable {
 
     private String dir;
     private String extension;
+    private MessageType type;
 
-    public FileRequest(String dir, String extension) {
+    public FileRequest(String dir, String extension, MessageType type) {
         this.dir = dir;
         this.extension = extension;
+        this.type = type;
+    }
+
+    public MessageType getType() {
+        return type;
+    }
+
+    public void setType(MessageType type) {
+        this.type = type;
     }
 
     public void setDir(String dir) {

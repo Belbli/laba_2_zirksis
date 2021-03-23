@@ -20,4 +20,8 @@ public class FileRequestResponse implements Serializable {
                 .map(entry -> entry.getKey() + " : " + entry.getValue())
                 .collect(Collectors.joining("; "));
     }
+
+    public Map<String, Long> getFilesInfo() {
+        return filesInfo;
+    }
 }
